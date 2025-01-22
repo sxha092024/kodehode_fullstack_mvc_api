@@ -11,13 +11,19 @@ Mål:
 5. Det skal kunne datostemple innleggets opprettelse og endringer.
 6. Det skal kunne "tracke" anntall visninger til spesifikke innlegg.
 7. Data skal lagres i SQLite, med abstraksjoner og relasjoner.
-8. Det skal være en front-end, brukergrensesnittet skal være forskjellig basert på om brukeren aktivt arbeider på ett spesifikt innlegg, eller om de er en leser av ett innlegg.
+8. Det skal være en front-end, brukergrensesnittet skal være forskjellig
+   basert på om brukeren aktivt arbeider på ett spesifikt innlegg, eller 
+   om de er en leser av ett innlegg.
 
 ## Krav for datahåndtering
-1. Sensitive og priviligert informasjon må kunne kommuniseres kryptert, dette gjelder spesielt for innlogging fra httpForms. Innloggingsprosessen skal returnere en token, for å opprette og vedlikeholde innloggingsøkten.
+1. Sensitive og priviligert informasjon må kunne kommuniseres kryptert, 
+   dette gjelder spesielt for innlogging fra httpForms. Innloggingsprosessen 
+   skal returnere en token, for å opprette og vedlikeholde innloggingsøkten.
     - Brukere skal kunne opprette nye sidebrukere fra brukernavn og passord.
-    - Passord skal ikke lagres i plaintext, og skal ikke eksistere i minnet lengre enn nødvendig.
-        - Eventuelle valg av backend språk kan bety at minnet må manuelt forsøpples, f.eks. pga. forsinket GC reclaimation.
+    - Passord skal ikke lagres i plaintext, og skal ikke eksistere i
+      minnet lengre enn nødvendig.
+        - Eventuelle valg av backend språk kan bety at minnet må manuelt
+          forsøpples, f.eks. pga. forsinket GC reclaimation.
     - Utenom forfattere av innlegg, skal brukernavn anonymiseres.
 2. Det skal være en oversikt over innlegg.
     - Tittell på innlegg.
@@ -39,10 +45,13 @@ Mål:
         - UPDATE
     - En eier av ett innlegg skal kunne slette innlegget.
         - DELETE
-        - En sletting vil sette innlegget i en kø som utfører destruering ved senere tid. Dette tillater at en angrer seg og kan gjennopprette innlegget.
+        - En sletting vil sette innlegget i en kø som utfører destruering ved
+          senere tid. Dette tillater at en angrer seg og kan gjennopprette innlegget.
     
 ## Utførelse av krav
-Valg av backend-språk avgjøres ved senere dato. Designpattern er fastsatt, MVC (Model, View, Controller). SQLite databasen anvendes som "source of truth" for dataen. Frontend utformes i HTML, CSS, og Javascript.
+Valg av backend-språk avgjøres ved senere dato. Designpattern er fastsatt, 
+MVC (Model, View, Controller). SQLite databasen anvendes som "source of truth" for dataen. 
+Frontend utformes i HTML, CSS, og Javascript.
 
 ### Backend
 - Det skal lages modeller for data
@@ -72,7 +81,6 @@ Valg av backend-språk avgjøres ved senere dato. Designpattern er fastsatt, MVC
 ## Sekvensdiagrammer
 
 1. Default route til API, /GET
-
 ```mermaid
 sequenceDiagram
     HttpRequest ->>+ ApiDefaultRoute: /GET
@@ -81,7 +89,6 @@ sequenceDiagram
 ```
 
 2. Sekvens for eksisterende login token. Skjer ved første tilkobling til nettsiden.
-
 ```mermaid
 sequenceDiagram
     actor User
@@ -270,6 +277,7 @@ sequenceDiagram
 ```
 
 ## Entitetsrelasjonsdiagram
+
 ```mermaid
 erDiagram
     User {
@@ -292,6 +300,7 @@ erDiagram
     User }|--o{ BlogPost: author
 ```
 
-Det skal også lages relasjonstabeller som holder oversikt over hvilken bruker som har en relasjon til hvilken blogpost.
+Det skal også lages relasjonstabeller som holder oversikt over hvilken bruker
+som har en relasjon til hvilken blogpost.
   - User 1..n UserOwnerRelation 1..1 BlogPost
   - User 1..n UserAuthorRelation n..m BlogPost
