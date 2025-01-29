@@ -1,0 +1,6 @@
+{
+    "enforce_root_files": true,
+    "root_files": [".watchmanconfig"],
+    "ignore_dirs": [".vscode", ".config", "BloggoApi/Database", "BloggoApi/logs", "BloggoApi/bin", "BloggoApi/obj", "drafts"],
+    "ignore_vcs": [".git", ".jj", ".sl", ".hg"]
+}
