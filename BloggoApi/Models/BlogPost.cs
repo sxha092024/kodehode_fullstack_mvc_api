@@ -14,4 +14,6 @@ public class BlogPost
     public required string Title { get; set; } = string.Empty;
     public required string Content { get; set; } = string.Empty;
     public required bool published { get; set; }
+    public required DateTimeOffset CreatedAt { get; set; }
+    public required DateTimeOffset? ModifiedAt { get; set; }
 }
