@@ -1,6 +1,8 @@
+using BloggoApi.Contexts.Converters;
 using BloggoApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace BloggoApi.Contexts;
@@ -52,5 +54,15 @@ public class SqliteDbContext : DbContext
             .HasForeignKey(b => b.OwnerId)
             .IsRequired();
         modelBuilder.Entity<BlogPost>().HasMany(b => b.Authors).WithMany(u => u.AuthoredPosts);
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(configurationBuilder);
+
+        configurationBuilder.Properties<DateTime>().HaveConversion<DateTimeAsUtcValueConverter>();
+        configurationBuilder
+            .Properties<DateTime?>()
+            .HaveConversion<NullableDateTimeAsUtcValueConverter>();
     }
 }
