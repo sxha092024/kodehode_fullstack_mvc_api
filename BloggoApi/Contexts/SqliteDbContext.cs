@@ -47,7 +47,8 @@ public class SqliteDbContext : DbContext
             .Entity<BlogPost>()
             .Property(b => b.OwnerId)
             .HasValueGenerator(typeof(V7Generator));
-        modelBuilder.Entity<BlogPost>()
+        modelBuilder
+            .Entity<BlogPost>()
             .Property(b => b.CreatedAt)
             .ValueGeneratedOnAdd()
             // NOTE: sqlite specific syntax, default value on insert is current time aligned to UTC-0

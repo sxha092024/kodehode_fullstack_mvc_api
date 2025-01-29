@@ -7,4 +7,3 @@ public class BlogPostService(ILogger<BlogPostService> logger, SqliteDbContext co
     private readonly ILogger<BlogPostService> _logger = logger;
     private readonly SqliteDbContext db = context;
 }
-
