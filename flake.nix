@@ -36,6 +36,10 @@
             omnisharp-roslyn
 
             csharpier
+
+            # db and tooling
+            sqlite
+            sqlitebrowser
           ];
           shellHook = ''
             export DOTNET_ROOT="${dotnetPkg}";
