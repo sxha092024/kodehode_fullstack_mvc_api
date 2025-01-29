@@ -40,6 +40,9 @@
             # db and tooling
             sqlite
             sqlitebrowser
+
+            # jj fs tricks
+            watchman
           ];
           shellHook = ''
             export DOTNET_ROOT="${dotnetPkg}";
