@@ -25,6 +25,8 @@ public class SqliteDbContext : DbContext
     public DbSet<BlogPost> BlogPosts { get; set; }
     public DbSet<User> Users { get; set; }
 
+    public DbSet<DeletionSchedule> ScheduledDeletions { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite("Data Source=Database/Bloggo.db; foreign keys=true");
@@ -60,6 +62,16 @@ public class SqliteDbContext : DbContext
             .HasForeignKey(b => b.OwnerId)
             .IsRequired();
         modelBuilder.Entity<BlogPost>().HasMany(b => b.Authors).WithMany(u => u.AuthoredPosts);
+
+        modelBuilder
+            .Entity<DeletionSchedule>()
+            .Property(d => d.DeletionId)
+            .HasValueGenerator(typeof(V7Generator));
+        modelBuilder
+            .Entity<DeletionSchedule>()
+            .Property(d => d._when)
+            .ValueGeneratedOnAdd()
+            .HasDefaultValueSql("strftime('%FT%H:%M:%fZ+00:00', 'now', '+1 month')");
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
