@@ -2,6 +2,7 @@ using BloggoApi.Contexts;
 using BloggoApi.Models;
 
 namespace BloggoApi.Services;
+
 public class DeletionService(ILogger<DeletionService> logger, SqliteDbContext context)
     : BackgroundService
 {

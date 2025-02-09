@@ -46,7 +46,11 @@ public class Program
         });
 
         builder.Services.AddSingleton<DeletionService>();
-        builder.Services.AddRouting(options => options.LowercaseUrls = true);
+        builder.Services.AddRouting(options =>
+        {
+            options.LowercaseUrls = true;
+            options.LowercaseQueryStrings = true;
+        });
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
