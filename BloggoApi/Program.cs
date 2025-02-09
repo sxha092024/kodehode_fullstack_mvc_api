@@ -1,4 +1,5 @@
 using BloggoApi.Contexts;
+using BloggoApi.Services;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Formatting.Json;
@@ -44,8 +45,8 @@ public class Program
             );
         });
 
+        builder.Services.AddSingleton<DeletionService>();
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
-
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
