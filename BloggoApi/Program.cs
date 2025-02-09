@@ -45,7 +45,7 @@ public class Program
             );
         });
 
-        builder.Services.AddSingleton<DeletionService>();
+        builder.Services.AddHostedService<DeletionService>();
         builder.Services.AddRouting(options =>
         {
             options.LowercaseUrls = true;

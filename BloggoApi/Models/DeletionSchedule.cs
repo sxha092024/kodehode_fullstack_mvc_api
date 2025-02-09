@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 public class DeletionSchedule
 {
-    public Guid DeletionId { get; set; } = Guid.CreateVersion7();
+    public Guid Id { get; set; } = Guid.CreateVersion7();
 
     // TODO: find a way to define an PK(this.Id, Either<BlogPost, User>) constraint
     // to avoid nullable fields. We ideally want to encode our invariants in the typesystem.
