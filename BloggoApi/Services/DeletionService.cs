@@ -64,7 +64,7 @@ public class DeletionService(ILogger<DeletionService> logger, IServiceScopeFacto
                 // expeditiously propogate deletions by attempting to commit the transaction now
                 await db.SaveChangesAsync();
                 // TODO: turn into injected variable to allow tuning
-                Thread.Sleep(1000);
+                await Task.Delay(1000);
             }
         }
     }
